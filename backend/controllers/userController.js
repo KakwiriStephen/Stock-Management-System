@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
 
+
 const registerUser = asyncHandler(async (req, res) => {
   //destructuring
   const { name, email, password } = req.body;
@@ -22,6 +23,8 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Email has already been registered");
   }
+
+
 
   //create User
 
