@@ -20,7 +20,7 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new Error("Password must be upto 6 characters");
   }
 
-  //check if user email alredy exist
+  //check if  email alredy exist
   const userExists = await User.findOne({ email });
 
   if (userExists) {
