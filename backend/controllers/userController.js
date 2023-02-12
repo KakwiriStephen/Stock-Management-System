@@ -6,7 +6,7 @@ const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
   //validation
-  if (!name || email || password) {
+  if (!name || !email || !password) {
     res.status(400);
     throw new Error("please fill in all required fields");
   }
