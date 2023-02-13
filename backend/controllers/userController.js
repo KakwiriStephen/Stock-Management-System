@@ -170,6 +170,16 @@ const loginStatus = asyncHandler(async (req, res) => {
 
 const updateUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
+
+  if (user) {
+    const { _id, name, email, photo, phone, bio } = user;
+
+    user.email = email;
+    user.name = req.body.name || name;
+    user.phone = req.body.phone || phone;
+    user.photo = req.body.photo || photo;
+    user.bio = req.body.bio || bio;
+  }
 });
 
 module.exports = {
