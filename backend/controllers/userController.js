@@ -67,6 +67,7 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 
 //Login User
+/////////////
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
@@ -107,6 +108,7 @@ const loginUser = asyncHandler(async (req, res) => {
       photo,
       phone,
       bio,
+      token,
     });
   } else {
     res.status(400);
@@ -114,7 +116,14 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 });
 
+//////////
+//LOGOUT USER///
+const logout = asyncHandler(async (req, res) => {
+  res.send("Logout");
+});
+
 module.exports = {
   registerUser,
   loginUser,
+  logout,
 };
