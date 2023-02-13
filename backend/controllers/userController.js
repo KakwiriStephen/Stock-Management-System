@@ -166,10 +166,17 @@ const loginStatus = asyncHandler(async (req, res) => {
   return res.json(false);
 });
 
+// Update User
+
+const updateUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+});
+
 module.exports = {
   registerUser,
   loginUser,
   logout,
   getUser,
   loginStatus,
+  updateUser,
 };
