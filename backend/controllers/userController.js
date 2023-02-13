@@ -119,7 +119,14 @@ const loginUser = asyncHandler(async (req, res) => {
 //////////
 //LOGOUT USER///
 const logout = asyncHandler(async (req, res) => {
-  res.send("Logout");
+  res.cookie("token", token, {
+    path: "/",
+    httpOnly: true,
+    expires: new Date(0), //1 day
+    sameSite: "none",
+    secure: true,
+  });
+  return res.status(200).json({ message: "Successfully Logged Out" });
 });
 
 module.exports = {
