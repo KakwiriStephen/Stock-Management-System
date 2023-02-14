@@ -230,7 +230,13 @@ const changePassword = asyncHandler(async (req, res) => {
 
 //forgot password
 const forgotPassword = asyncHandler(async (req, res) => {
-  res.send("Forgot Password");
+  const { email } = req.body;
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    res.status(400);
+    throw new Error("User Does Not Exist Please Sign Up");
+  }
 });
 
 module.exports = {
