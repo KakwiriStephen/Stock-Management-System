@@ -2,6 +2,8 @@ const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const crypto = require("crypto");
+const Token = require("../models/tokenModel");
 
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1d" });
@@ -228,6 +230,53 @@ const changePassword = asyncHandler(async (req, res) => {
   }
 });
 
+//forgot password
+const forgotPassword = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    res.status(400);
+    throw new Error("User Does Not Exist Please Sign Up");
+  }
+
+  //Create reset Token
+  let resetToken = crypto.randomBytes(32).toString("hex") + user._id;
+
+  //Hash token before saving to DB
+  const hashedToken = crypto
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
+
+  //Save Token to DB
+  await new Token({
+    userId: user._id,
+    token: hashedToken,
+    createdAt: Date.now(),
+    expiresAt: Date.now() + 30 * (60 * 1000),
+  }).save();
+
+  //Construct Reset Url
+  const resetUrl = `${process.env.FRONTEND_URL}/resetpassword/${resetToken}`;
+
+  //Reset Email
+
+  const message = `
+    <h2>Hello ${user.name}<h2/>
+    <p> Please use the url bellow to reset your password <p/>
+    <p> This reset link is valid for only 30 minutes <p/>
+
+    
+    <a href=${resetUrl} clicktracking=off>${resetUrl}</a>
+
+    <P>Regards...</P>
+    <P>Stockify</P>
+  `;
+
+  res.send("Forgot Password");
+});
+
 module.exports = {
   registerUser,
   loginUser,
@@ -236,4 +285,5 @@ module.exports = {
   loginStatus,
   updateUser,
   changePassword,
+  forgotPassword,
 };
