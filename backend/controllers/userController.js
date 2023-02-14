@@ -249,7 +249,13 @@ const forgotPassword = asyncHandler(async (req, res) => {
     .update(resetToken)
     .digest("hex");
 
-  console.log(hashedToken);
+  //Save Token to DB
+  await new Token({
+    userId: user._id,
+    token: hashedToken,
+    createdAt: Date.now(),
+    expiresAt: Date.now() + 30 * (60 * 1000),
+  }).save();
 
   res.send("Forgot Password");
 });
