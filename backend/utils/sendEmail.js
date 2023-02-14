@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 
-const sendMail = async (req, res) => {
+const sendMail = async (subject, message, send_to, sent_from, reply_to) => {
   //Create Transporter
 
   const transporter = nodemailer.createTransport({
@@ -14,4 +14,13 @@ const sendMail = async (req, res) => {
       rejectUnauthorized: false,
     },
   });
+
+  //Options for sending Email
+  const options = {
+    from: sent_from,
+    to: send_to,
+    replyTo: reply_to,
+    subject: subject,
+    html: message,
+  };
 };
