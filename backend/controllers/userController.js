@@ -313,6 +313,14 @@ const resetPassword = asyncHandler(async (req, res) => {
     token: hashedToken,
     expiresAt: { $gt: Date.now() },
   });
+
+  if (!userToken) {
+    res.status(400);
+    throw new Error("Invalid or Expired token");
+  }
+
+  //Find Token
+  const user = await User.findOne({ _id: userToken.userId });
 });
 
 module.exports = {
