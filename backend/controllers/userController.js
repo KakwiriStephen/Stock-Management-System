@@ -321,6 +321,12 @@ const resetPassword = asyncHandler(async (req, res) => {
 
   //Find Token
   const user = await User.findOne({ _id: userToken.userId });
+
+  user.password = password;
+  await user.save();
+  res.status(200).json({
+    message: "Password reset Successful, Please login ",
+  });
 });
 
 module.exports = {
