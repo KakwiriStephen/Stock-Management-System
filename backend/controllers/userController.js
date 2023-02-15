@@ -241,6 +241,12 @@ const forgotPassword = asyncHandler(async (req, res) => {
     throw new Error("User Does Not Exist Please Sign Up");
   }
 
+  //Delete token if it exists
+  let token = await Token.findOne({ userId: user._id });
+  if (token) {
+    await token.deleteOne();
+  }
+
   //Create reset Token
   let resetToken = crypto.randomBytes(32).toString("hex") + user._id;
 
