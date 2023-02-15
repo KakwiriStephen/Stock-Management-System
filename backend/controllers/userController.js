@@ -306,6 +306,13 @@ const resetPassword = asyncHandler(async (req, res) => {
     .createHash("sha256")
     .update(resetToken)
     .digest("hex");
+
+  //Find token in db
+
+  const userToken = await Token.findOne({
+    token: hashedToken,
+    expiresAt: { $gt: Date.now() },
+  });
 });
 
 module.exports = {
