@@ -319,7 +319,7 @@ const resetPassword = asyncHandler(async (req, res) => {
     throw new Error("Invalid or Expired token");
   }
 
-  //Find Token
+  //Find /Token
   const user = await User.findOne({ _id: userToken.userId });
 
   user.password = password;
