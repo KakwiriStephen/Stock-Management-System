@@ -297,7 +297,8 @@ const forgotPassword = asyncHandler(async (req, res) => {
 
 //Reset Token
 const resetPassword = asyncHandler(async (req, res) => {
-  res.send("Reset Password");
+  const { password } = req.body;
+  const { resetToken } = req.params;
 });
 
 module.exports = {
