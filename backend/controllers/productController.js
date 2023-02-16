@@ -18,6 +18,23 @@ const createProduct = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Please fill in all the required fields");
   }
+
+  //Handling File uploads
+  let fileData = {};
+  if (req.file) {
+    //Save Image to cloudinary
+    let uploadedFile;
+
+    try {
+      uploadedFile = await cloudinary.uploader.upload(req.file.path, {
+        folder: "Stockify App",
+        resource_type: "image",
+      });
+    } catch (error) {
+      res.status(500);
+      throw new Error("Image could not be uploaded");
+    }
+  }
 });
 
 module.exports = { createProduct };
