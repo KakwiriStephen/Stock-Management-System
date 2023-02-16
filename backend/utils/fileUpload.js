@@ -12,3 +12,17 @@ const storage = multer.diskStorage({
     ); //Add date to file
   },
 });
+
+//Specify file format that can be saved
+
+function fileFilter(req, file, cb) {
+  if (
+    file.mimetype === "image/png" ||
+    file.mimetype === "image/jpg" ||
+    file.mimetype === "image/jpeg"
+  ) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+}
