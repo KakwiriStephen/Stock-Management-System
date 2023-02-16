@@ -77,7 +77,7 @@ const getProduct = asyncHandler(async (req, res) => {
     throw new Error("Product Not Found");
   }
 
-  //Match product to its User
+  //Match product to User
 
   if (product.user.toString() !== req.user.id) {
     res.status(401);
