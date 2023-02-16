@@ -29,7 +29,7 @@ function fileFilter(req, file, cb) {
 
 const upload = multer({ storage, fileFilter });
 
-//File size Formater
+//File sizeFormater
 
 const fileSizeFormatter = (bytes, decimal) => {
   if (bytes == 0) {
