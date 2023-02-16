@@ -50,6 +50,7 @@ const createProduct = asyncHandler(async (req, res) => {
     name,
     sku,
     category,
+    quantity,
     price,
     description,
     image: fileData,
