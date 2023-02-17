@@ -107,4 +107,32 @@ const deleteProduct = asyncHandler(async (req, res) => {
   res.status(200).json("Product  deleted successfuly");
 });
 
-module.exports = { createProduct, getProducts, getProduct, deleteProduct };
+//update Product
+
+const updateProduct = asyncHandler(async (req, res) => {
+  const { name, category, quantity, price, description } = req.body;
+  const { id } = req.params;
+
+  const product = await Product.findById(id);
+
+  //If product doesnt exist
+  if (!product) {
+    res.status(404);
+    throw new Error("Product Not Found");
+  }
+
+  //Match product to User
+
+  if (product.user.toString() !== req.user.id) {
+    res.status(401);
+    throw new Error("User not authorized");
+  }
+});
+
+module.exports = {
+  createProduct,
+  getProducts,
+  getProduct,
+  deleteProduct,
+  updateProduct,
+};
