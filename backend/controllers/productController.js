@@ -85,4 +85,11 @@ const getProduct = asyncHandler(async (req, res) => {
   }
   res.status(200).json(product);
 });
-module.exports = { createProduct, getProducts, getProduct };
+
+//Delete product
+
+const deleteProduct = asyncHandler(async (req, res) => {
+  res.send("Product Deleted");
+});
+
+module.exports = { createProduct, getProducts, getProduct, deleteProduct };
