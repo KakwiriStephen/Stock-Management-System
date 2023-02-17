@@ -107,4 +107,16 @@ const deleteProduct = asyncHandler(async (req, res) => {
   res.status(200).json("Product  deleted successfuly");
 });
 
-module.exports = { createProduct, getProducts, getProduct, deleteProduct };
+//update Product
+
+const updateProduct = asyncHandler(async (req, res) => {
+  res.send("Twende nalo kanjiwa");
+});
+
+module.exports = {
+  createProduct,
+  getProducts,
+  getProduct,
+  deleteProduct,
+  updateProduct,
+};
