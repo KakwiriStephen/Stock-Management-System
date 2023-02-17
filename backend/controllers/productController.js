@@ -110,7 +110,8 @@ const deleteProduct = asyncHandler(async (req, res) => {
 //update Product
 
 const updateProduct = asyncHandler(async (req, res) => {
-  res.send("Twende nalo kanjiwa");
+  const { name, category, quantity, price, description } = req.body;
+  const { id } = req.params;
 });
 
 module.exports = {
