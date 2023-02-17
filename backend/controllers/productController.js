@@ -127,6 +127,24 @@ const updateProduct = asyncHandler(async (req, res) => {
     res.status(401);
     throw new Error("User not authorized");
   }
+
+  //Handle File Upload
+  let fileData = {};
+
+  if (req.file) {
+    //save image to cloudinary
+    let uploadedFile;
+
+    try {
+      uploadedFile = await cloudinary.uploader.upload(req.file.path, {
+        folder: "Stockify App",
+        resource_type: "image",
+      });
+    } catch (error) {
+      res.status(500);
+      throw new Error("Image could not be uploaded");
+    }
+  }
 });
 
 module.exports = {
