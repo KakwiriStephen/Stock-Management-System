@@ -3,7 +3,7 @@ const User = require("../models/userModel");
 const sendEmail = require("../utils/sendEmail");
 
 const contactUs = asyncHandler(async (req, res) => {
-  res.send("Talk to us");
+  const { subject, message } = req.body;
 });
 
 module.exports = { contactUs };
