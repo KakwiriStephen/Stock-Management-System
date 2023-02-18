@@ -11,6 +11,12 @@ const contactUs = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("User not found, please signup");
   }
+
+  //   Validation
+  if (!subject || !message) {
+    res.status(400);
+    throw new Error("Please add subject and message");
+  }
 });
 
 module.exports = { contactUs };
