@@ -38,7 +38,7 @@ const Home = () => {
       {/* HERO SECTION */}
       <section className="container hero">
         <div className="hero-text">
-          <h2>Inventory {"&"} Stock Management Solution</h2>
+          <h2>Retail-Stock Management Solution</h2>
           <p>
             We offer an advanced inventory system that enables real-time control
             and management of products in your warehouse. Our system is fully
